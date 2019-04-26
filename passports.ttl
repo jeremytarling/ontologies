@@ -3,8 +3,6 @@
 # imports: http://purl.org/dc/terms/
 # imports: http://www.bbc.co.uk/ontologies/provenance
 
-@prefix bbc:     <http://www.bbc.co.uk/ontologies/bbc/> .
-@prefix core:    <http://www.bbc.co.uk/ontologies/coreconcepts/> .
 @prefix dc:      <http://purl.org/dc/elements/1.1/> .
 @prefix dcterms:  <http://purl.org/dc/terms/> .
 @prefix owl:     <http://www.w3.org/2002/07/owl#> .

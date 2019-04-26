@@ -1,0 +1,116 @@
+# baseURI: http://www.bbc.co.uk/ontologies/passports
+# imports: http://purl.org/dc/elements/1.1/
+# imports: http://purl.org/dc/terms/
+# imports: http://www.bbc.co.uk/ontologies/provenance
+
+@prefix bbc:     <http://www.bbc.co.uk/ontologies/bbc/> .
+@prefix core:    <http://www.bbc.co.uk/ontologies/coreconcepts/> .
+@prefix dc:      <http://purl.org/dc/elements/1.1/> .
+@prefix dcterms:  <http://purl.org/dc/terms/> .
+@prefix owl:     <http://www.w3.org/2002/07/owl#> .
+@prefix pass:  <http://www.bbc.co.uk/ontologies/passports/> .
+@prefix provenance:  <http://www.bbc.co.uk/ontologies/provenance/> .
+@prefix rdf:     <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
+@prefix rdfs:    <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix xsd:     <http://www.w3.org/2001/XMLSchema#> .
+
+<http://www.bbc.co.uk/ontologies/passports>
+      rdf:type provenance:Ontology , owl:Ontology ;
+      rdfs:comment "The Passport ontology is a representation of how Passports and their properties relate the the established BBC model of Creative Works annotated with BBC Things (aka Tags)."@en-gb ;
+      rdfs:label "Passports Ontology"@en-gb ;
+      dc:creator <mailto:jeremy.tarling@bbc.co.uk> ;
+      dc:date "2019-05-01"^^xsd:date ;
+      dcterms:license <http://creativecommons.org/licenses/by/4.0/> ;
+      provenance:canonicalLocation
+              "https://github.com/bbc/ontologies/blob/master/core/passports.ttl"^^xsd:string ;
+      provenance:changeReason
+              "first version"@en-gb ;
+      provenance:public "true"^^xsd:boolean ;
+      provenance:slug "passports"^^xsd:string ;
+      provenance:version "0.1"^^xsd:string ;
+      owl:imports dc: , dcterms: , <http://www.bbc.co.uk/ontologies/provenance> ;
+      owl:versionIRI <http://www.bbc.co.uk/ontologies/coreconcepts/0.1> ;
+      owl:versionInfo "0.1"^^xsd:string .
+
+## classes ##
+
+pass:Passport
+      rdf:type owl:Class ;
+      rdfs:comment "a metadata document that describes a BBC asset"@en-gb ;
+      rdfs:isDefinedBy <http://www.bbc.co.uk/ontologies/passports> ;
+      rdfs:label "Passport"@en-gb ;
+      rdfs:subClassOf core:Thing .
+
+## predicates ##
+
+pass:describes
+      rdf:type owl:DatatypeProperty ;
+      rdfs:comment "the relationship between a Passport instance and the owl:Thing that it describes."@en-gb ;
+      rdfs:isDefinedBy <http://www.bbc.co.uk/ontologies/passports> ;
+      rdfs:label "describes"@en-gb ;
+      rdfs:domain pass:Passport ;
+      rdfs:range owl:Thing .
+
+pass:locator
+      rdf:type owl:DatatypeProperty ;
+      rdfs:comment "The locator property indicates a unique ID for the asset that the Passport is describing, equivalent to the cms:locator property in the CMS ontology."@en-gb ;
+      rdfs:isDefinedBy <http://www.bbc.co.uk/ontologies/passports> ;
+      rdfs:label "locator"@en-gb ;
+      rdfs:domain pass:Passport ;
+      rdfs:range xsd:string .
+
+pass:home
+      rdf:type owl:DatatypeProperty ;
+      rdfs:comment "The home property defines which BBC product owns the content and has its branding applied when the content is displayed to the audience.  Homes will be top level products such as News, Sport, BBC Three, BBC Mundo and iPlayer."@en-gb ;
+      rdfs:isDefinedBy <http://www.bbc.co.uk/ontologies/passports> ;
+      rdfs:label "home"@en-gb ;
+      rdfs:domain pass:Passport ;
+      rdfs:range xsd:string .
+
+pass:category
+      rdf:type owl:DatatypeProperty ;
+      rdfs:comment "The category property will enable us to distinguish factual reports from analysis, opinion and other genres. Applies to text, video, audio and other work. Our ambition is to align the categories so that they can be mapped to the Trust Project's Type of Work definitions.  However, the Types of Work definitions are designed for journalistic content so we may not be able to create mappings for fictional content or other types of non-journalism content such as recipes."@en-gb ;
+      rdfs:isDefinedBy <http://www.bbc.co.uk/ontologies/passports> ;
+      rdfs:label "category"@en-gb ;
+      rdfs:domain pass:Passport ;
+      rdfs:range xsd:string .
+
+pass:genre
+      rdf:type owl:DatatypeProperty ;
+      rdfs:comment "The genre property indicates broad sets into which we can group content.  In the programmes world the set of genres is defined in the Programmes ontology and can be seen at http://www.bbc.co.uk/programmes/genres.  In News the site sections such as 'politics' and 'business' broadly map to the Passport definition of genre."@en-gb ;
+      rdfs:isDefinedBy <http://www.bbc.co.uk/ontologies/passports> ;
+      rdfs:label "genre"@en-gb ;
+      rdfs:domain pass:Passport ;
+      rdfs:range xsd:string .
+
+pass:createdBy
+      rdf:type owl:DatatypeProperty ;
+      rdfs:comment "The createdBy property tells us who created the content.  This is separated out from home to allow for editorial teams who create content for multiple products, Newsbeat creating content for both News and BBC Three for example.  The values for createdBy should model the BBC's organisational structure, this will make it possible to attribute content to either a broad division or to a specific team depending on the use case.  So if a piece of content was created by the BBC Berkshire team we should also be able to know that the team is part of English Regions which is part of Domestic News."@en-gb ;
+      rdfs:isDefinedBy <http://www.bbc.co.uk/ontologies/passports> ;
+      rdfs:label "createdBy"@en-gb ;
+      rdfs:domain pass:Passport ;
+      rdfs:range xsd:string .
+
+pass:language
+      rdf:type owl:DatatypeProperty ;
+      rdfs:comment "The language property indicates the language that the content's intended audience speaks and understands.  We have built a Passport Store endpoint that returns the list of supported languages: https://passport-store.api.bbci.co.uk/passport-values"@en-gb ;
+      rdfs:isDefinedBy <http://www.bbc.co.uk/ontologies/passports> ;
+      rdfs:label "language"@en-gb ;
+      rdfs:domain pass:Passport ;
+      rdfs:range xsd:string .
+
+pass:campaign
+      rdf:type owl:DatatypeProperty ;
+      rdfs:comment "The campaign property is used to indicate time-bound editorial initiatives where content is created with the aim of moving a target metric.  Content that will be popular with 16-35 year old women for example.  The list of active campaigns is managed by the Audience Engagement team and campaigns are applied to content when it is created.  The campaign identifier can then be used to produce reports so that editorial can evaluate the campaign's success. "@en-gb ;
+      rdfs:isDefinedBy <http://www.bbc.co.uk/ontologies/passports> ;
+      rdfs:label "campaign"@en-gb ;
+      rdfs:domain pass:Passport ;
+      rdfs:range xsd:string .
+
+pass:state
+      rdf:type owl:DatatypeProperty ;
+      rdfs:comment "A key difference between Passports and previous common metadata models such as Creative Works is that Passports can describe entities that are not yet published or will never be published.  Holding a representation of state in Passport thus becomes necessary so that systems listening to Passport notifications can quickly decide if a Passport creation or state change is relevant to them, audience facing systems will not be interested in content that is not intended to be consumed by the audience. As BBC content management systems all implement different workflows with different statuses the Passport state model needs to be very simple and generic so as not to be a bar to integration.  We propose that state be represented by a boolean flag that determines whether content is intended to be available to the audience or not.  Please note that further rights restrictions may be imposed on the content and that we do not intend to model detailed rights information in Passports."@en-gb ;
+      rdfs:isDefinedBy <http://www.bbc.co.uk/ontologies/passports> ;
+      rdfs:label "state"@en-gb ;
+      rdfs:domain pass:Passport ;
+      rdfs:range xsd:string .

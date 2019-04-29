@@ -14,7 +14,7 @@
 
 <http://www.bbc.co.uk/ontologies/passports>
       rdf:type provenance:Ontology , owl:Ontology ;
-      rdfs:comment "The Passport ontology is a representation of how Passports and their properties relate the the established BBC model of Creative Works annotated with BBC Things (aka Tags)."@en-gb ;
+      rdfs:comment "The Passport ontology is a representation of how Passports and their properties relate to the established BBC model of Creative Works annotated with BBC Things (aka Tags)."@en-gb ;
       rdfs:label "Passports Ontology"@en-gb ;
       dc:creator <mailto:jeremy.tarling@bbc.co.uk> ;
       dc:date "2019-05-01"^^xsd:date ;

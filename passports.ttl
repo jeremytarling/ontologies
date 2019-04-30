@@ -7,6 +7,7 @@
 @prefix dcterms:  <http://purl.org/dc/terms/> .
 @prefix owl:     <http://www.w3.org/2002/07/owl#> .
 @prefix pass:  <http://www.bbc.co.uk/ontologies/passports/> .
+@prefix po:  <http://www.bbc.co.uk/ontologies/programmes/> .
 @prefix provenance:  <http://www.bbc.co.uk/ontologies/provenance/> .
 @prefix rdf:     <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
 @prefix rdfs:    <http://www.w3.org/2000/01/rdf-schema#> .
@@ -37,7 +38,21 @@ pass:Passport
       rdfs:comment "a metadata document that describes a BBC asset"@en-gb ;
       rdfs:isDefinedBy <http://www.bbc.co.uk/ontologies/passports> ;
       rdfs:label "Passport"@en-gb ;
-      rdfs:subClassOf core:Thing .
+      rdfs:subClassOf owl:Thing .
+
+pass:Home
+      rdf:type owl:Class ;
+      rdfs:comment "an enumerated type object that represents the BBC product that owns the content"@en-gb ;
+      rdfs:isDefinedBy <http://www.bbc.co.uk/ontologies/passports> ;
+      rdfs:label "Home"@en-gb ;
+      rdfs:subClassOf owl:Thing .
+
+pass:State
+      rdf:type owl:Class ;
+      rdfs:comment "an enumerated type object that represents the stae of an asset (for example published vs unpublished)"@en-gb ;
+      rdfs:isDefinedBy <http://www.bbc.co.uk/ontologies/passports> ;
+      rdfs:label "State"@en-gb ;
+      rdfs:subClassOf owl:Thing .
 
 ## predicates ##
 
@@ -49,21 +64,13 @@ pass:describes
       rdfs:domain pass:Passport ;
       rdfs:range owl:Thing .
 
-pass:locator
-      rdf:type owl:DatatypeProperty ;
-      rdfs:comment "The locator property indicates a unique ID for the asset that the Passport is describing, equivalent to the cms:locator property in the CMS ontology."@en-gb ;
-      rdfs:isDefinedBy <http://www.bbc.co.uk/ontologies/passports> ;
-      rdfs:label "locator"@en-gb ;
-      rdfs:domain pass:Passport ;
-      rdfs:range xsd:string .
-
 pass:home
       rdf:type owl:DatatypeProperty ;
       rdfs:comment "The home property defines which BBC product owns the content and has its branding applied when the content is displayed to the audience.  Homes will be top level products such as News, Sport, BBC Three, BBC Mundo and iPlayer."@en-gb ;
       rdfs:isDefinedBy <http://www.bbc.co.uk/ontologies/passports> ;
       rdfs:label "home"@en-gb ;
       rdfs:domain pass:Passport ;
-      rdfs:range xsd:string .
+      rdfs:range pass:Home .
 
 pass:category
       rdf:type owl:DatatypeProperty ;
@@ -71,7 +78,7 @@ pass:category
       rdfs:isDefinedBy <http://www.bbc.co.uk/ontologies/passports> ;
       rdfs:label "category"@en-gb ;
       rdfs:domain pass:Passport ;
-      rdfs:range xsd:string .
+      rdfs:range po:Category .
 
 pass:genre
       rdf:type owl:DatatypeProperty ;
@@ -79,7 +86,7 @@ pass:genre
       rdfs:isDefinedBy <http://www.bbc.co.uk/ontologies/passports> ;
       rdfs:label "genre"@en-gb ;
       rdfs:domain pass:Passport ;
-      rdfs:range xsd:string .
+      rdfs:range po:Genre .
 
 pass:createdBy
       rdf:type owl:DatatypeProperty ;
@@ -111,4 +118,4 @@ pass:state
       rdfs:isDefinedBy <http://www.bbc.co.uk/ontologies/passports> ;
       rdfs:label "state"@en-gb ;
       rdfs:domain pass:Passport ;
-      rdfs:range xsd:string .
+      rdfs:range pass:State .

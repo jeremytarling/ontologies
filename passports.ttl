@@ -47,6 +47,13 @@ pass:Home
       rdfs:label "Home"@en-gb ;
       rdfs:subClassOf owl:Thing .
 
+pass:Language
+      rdf:type owl:Class ;
+      rdfs:comment "an enumerated type object that represents the language that the content is written in"@en-gb ;
+      rdfs:isDefinedBy <http://www.bbc.co.uk/ontologies/passports> ;
+      rdfs:label "Language"@en-gb ;
+      rdfs:subClassOf owl:Thing .
+
 pass:State
       rdf:type owl:Class ;
       rdfs:comment "an enumerated type object that represents the stae of an asset (for example published vs unpublished)"@en-gb ;
@@ -120,245 +127,285 @@ pass:state
       rdfs:domain pass:Passport ;
       rdfs:range pass:State .
 
+pass:tag
+      rdf:type owl:DatatypeProperty ;
+      rdfs:comment "The relationship between a Passport and a BBC Thing - a tagging"@en-gb ;
+      rdfs:isDefinedBy <http://www.bbc.co.uk/ontologies/passports> ;
+      rdfs:label "tag"@en-gb ;
+      rdfs:domain pass:Passport ;
+      rdfs:range core:Thing .
+
+pass:about
+      rdf:type owl:DatatypeProperty ;
+      rdfs:comment "Aboutness - a strong relationship between the asset that a Passport describes and a BBC Thing - a tagging"@en-gb ;
+      rdfs:isDefinedBy <http://www.bbc.co.uk/ontologies/passports> ;
+      rdfs:label "about"@en-gb ;
+      rdfs:domain pass:Passport ;
+      rdfs:range core:Thing ;
+      rdfs:subPropertyOf pass:tag .
+
+pass:mentions
+      rdf:type owl:DatatypeProperty ;
+      rdfs:comment "Mentions - a weak relationship relationship between the asset that a Passport descrtibes and a BBC Thing - a tagging"@en-gb ;
+      rdfs:isDefinedBy <http://www.bbc.co.uk/ontologies/passports> ;
+      rdfs:label "mentions"@en-gb ;
+      rdfs:domain pass:Passport ;
+      rdfs:range core:Thing ;
+      rdfs:subPropertyOf pass:tag .
 
 ## enumerated types of Home class ##
 
 # note: for these to resolve to a web address at www.bbc.co.uk/ontologies any system implementations should use the #term_ fragment identifier pattern, eg:
-# https://www.bbc.co.uk/ontologies/passports#terms_News
-# https://www.bbc.co.uk/ontologies/passports#terms_iPlayer
+# https://www.bbc.co.uk/ontologies/passports#terms_Home_BBCThree
+# https://www.bbc.co.uk/ontologies/passports#terms_Home_iPlayer
 
 #### Products ####
 
-pass:News
-      rdf:type owl:Class ;
-      rdfs:comment "the Passports Home for BBC News assets"@en-gb ;
-      rdfs:isDefinedBy <http://www.bbc.co.uk/ontologies/passports> ;
-      rdfs:label "BBC News"@en-gb ;
-      rdfs:subClassOf pass:Home .
-
-pass:Newsround
-      rdf:type owl:Class ;
-      rdfs:comment "the Passports Home for BBC Newsround assets"@en-gb ;
-      rdfs:isDefinedBy <http://www.bbc.co.uk/ontologies/passports> ;
-      rdfs:label "BBC Newsround"@en-gb ;
-      rdfs:subClassOf pass:Home .
-
-pass:BBCThree
+pass:Home_BBCThree
       rdf:type owl:Class ;
       rdfs:comment "the Passports Home for BBC Three assets"@en-gb ;
       rdfs:isDefinedBy <http://www.bbc.co.uk/ontologies/passports> ;
       rdfs:label "BBC Three"@en-gb ;
       rdfs:subClassOf pass:Home .
 
-pass:Sounds
-      rdf:type owl:Class ;
-      rdfs:comment "the Passports Home for BBC Sounds assets"@en-gb ;
-      rdfs:isDefinedBy <http://www.bbc.co.uk/ontologies/passports> ;
-      rdfs:label "BBC Sounds"@en-gb ;
-      rdfs:subClassOf pass:Home .
-
-pass:iPlayer
-      rdf:type owl:Class ;
-      rdfs:comment "the Passports Home for BBC iPlayer assets"@en-gb ;
-      rdfs:isDefinedBy <http://www.bbc.co.uk/ontologies/passports> ;
-      rdfs:label "BBC iPlayer"@en-gb ;
-      rdfs:subClassOf pass:Home .
-
-pass:Sport
-      rdf:type owl:Class ;
-      rdfs:comment "the Passports Home for BBC Sport assets"@en-gb ;
-      rdfs:isDefinedBy <http://www.bbc.co.uk/ontologies/passports> ;
-      rdfs:label "BBC Sport"@en-gb ;
-      rdfs:subClassOf pass:Home .
-
-pass:CymruFyw
+pass:Home_CymruFyw
       rdf:type owl:Class ;
       rdfs:comment "the Passports Home for BBC Cymru Fyw (Wales today) assets"@en-gb ;
       rdfs:isDefinedBy <http://www.bbc.co.uk/ontologies/passports> ;
       rdfs:label "BBC Cymru Fyw"@en-gb ;
       rdfs:subClassOf pass:Home .
 
+pass:Home_iPlayer
+      rdf:type owl:Class ;
+      rdfs:comment "the Passports Home for BBC iPlayer assets"@en-gb ;
+      rdfs:isDefinedBy <http://www.bbc.co.uk/ontologies/passports> ;
+      rdfs:label "BBC iPlayer"@en-gb ;
+      rdfs:subClassOf pass:Home .
+
+pass:Home_News
+      rdf:type owl:Class ;
+      rdfs:comment "the Passports Home for BBC News assets"@en-gb ;
+      rdfs:isDefinedBy <http://www.bbc.co.uk/ontologies/passports> ;
+      rdfs:label "BBC News"@en-gb ;
+      rdfs:subClassOf pass:Home .
+
+pass:Home_Newsround
+      rdf:type owl:Class ;
+      rdfs:comment "the Passports Home for BBC Newsround assets"@en-gb ;
+      rdfs:isDefinedBy <http://www.bbc.co.uk/ontologies/passports> ;
+      rdfs:label "BBC Newsround"@en-gb ;
+      rdfs:subClassOf pass:Home .
+
+pass:Home_Sounds
+      rdf:type owl:Class ;
+      rdfs:comment "the Passports Home for BBC Sounds assets"@en-gb ;
+      rdfs:isDefinedBy <http://www.bbc.co.uk/ontologies/passports> ;
+      rdfs:label "BBC Sounds"@en-gb ;
+      rdfs:subClassOf pass:Home .
+
+pass:Home_Sport
+      rdf:type owl:Class ;
+      rdfs:comment "the Passports Home for BBC Sport assets"@en-gb ;
+      rdfs:isDefinedBy <http://www.bbc.co.uk/ontologies/passports> ;
+      rdfs:label "BBC Sport"@en-gb ;
+      rdfs:subClassOf pass:Home .
+
 #### WS Languages ####
 
-pass:AfaanOromoo
+pass:Home_AfaanOromoo
       rdf:type owl:Class ;
       rdfs:comment "the Passports Home for BBC Afaan Oromoo assets"@en-gb ;
       rdfs:isDefinedBy <http://www.bbc.co.uk/ontologies/passports> ;
       rdfs:label "BBC Afaan Oromoo"@en-gb ;
       rdfs:subClassOf pass:Home .
 
-pass:Afrique
+pass:Home_Afrique
       rdf:type owl:Class ;
       rdfs:comment "the Passports Home for BBC Afrique assets"@en-gb ;
       rdfs:isDefinedBy <http://www.bbc.co.uk/ontologies/passports> ;
       rdfs:label "BBC Afrique"@en-gb ;
       rdfs:subClassOf pass:Home .
 
-pass:Amharic
+pass:Home_Amharic
       rdf:type owl:Class ;
       rdfs:comment "the Passports Home for BBC Amharic assets"@en-gb ;
       rdfs:isDefinedBy <http://www.bbc.co.uk/ontologies/passports> ;
       rdfs:label "BBC Amharic"@en-gb ;
       rdfs:subClassOf pass:Home .
 
-pass:Arabic
+pass:Home_Arabic
       rdf:type owl:Class ;
       rdfs:comment "the Passports Home for BBC Arabic assets"@en-gb ;
       rdfs:isDefinedBy <http://www.bbc.co.uk/ontologies/passports> ;
       rdfs:label "BBC Arabic"@en-gb ;
       rdfs:subClassOf pass:Home .
 
-pass:Azeri
+pass:Home_Azeri
       rdf:type owl:Class ;
       rdfs:comment "the Passports Home for BBC Azeri assets"@en-gb ;
       rdfs:isDefinedBy <http://www.bbc.co.uk/ontologies/passports> ;
       rdfs:label "BBC Azeri"@en-gb ;
       rdfs:subClassOf pass:Home .
 
-pass:Bengali
+pass:Home_Bengali
       rdf:type owl:Class ;
       rdfs:comment "the Passports Home for BBC Bengali assets"@en-gb ;
       rdfs:isDefinedBy <http://www.bbc.co.uk/ontologies/passports> ;
       rdfs:label "BBC Bengali"@en-gb ;
       rdfs:subClassOf pass:Home .
 
-pass:Brasil
+pass:Home_Brasil
       rdf:type owl:Class ;
       rdfs:comment "the Passports Home for BBC Brasil assets"@en-gb ;
       rdfs:isDefinedBy <http://www.bbc.co.uk/ontologies/passports> ;
       rdfs:label "BBC Brasil"@en-gb ;
       rdfs:subClassOf pass:Home .
 
-pass:Gujarati
+pass:Home_Gujarati
       rdf:type owl:Class ;
       rdfs:comment "the Passports Home for BBC Gujarati assets"@en-gb ;
       rdfs:isDefinedBy <http://www.bbc.co.uk/ontologies/passports> ;
       rdfs:label "BBC Gujarati"@en-gb ;
       rdfs:subClassOf pass:Home .
 
-pass:Hausa
+pass:Home_Hausa
       rdf:type owl:Class ;
       rdfs:comment "the Passports Home for BBC Hausa assets"@en-gb ;
       rdfs:isDefinedBy <http://www.bbc.co.uk/ontologies/passports> ;
       rdfs:label "BBC Hausa"@en-gb ;
       rdfs:subClassOf pass:Home .
 
-pass:Hindi
+pass:Home_Hindi
       rdf:type owl:Class ;
       rdfs:comment "the Passports Home for BBC Hindi assets"@en-gb ;
       rdfs:isDefinedBy <http://www.bbc.co.uk/ontologies/passports> ;
       rdfs:label "BBC Hindi"@en-gb ;
       rdfs:subClassOf pass:Home .
 
-pass:Igbo
+pass:Home_Igbo
       rdf:type owl:Class ;
       rdfs:comment "the Passports Home for BBC Igbo assets"@en-gb ;
       rdfs:isDefinedBy <http://www.bbc.co.uk/ontologies/passports> ;
       rdfs:label "BBC Igbo"@en-gb ;
       rdfs:subClassOf pass:Home .
 
-pass:Indonesia
+pass:Home_Indonesia
       rdf:type owl:Class ;
       rdfs:comment "the Passports Home for BBC Indonesia assets"@en-gb ;
       rdfs:isDefinedBy <http://www.bbc.co.uk/ontologies/passports> ;
       rdfs:label "BBC Indonesia"@en-gb ;
       rdfs:subClassOf pass:Home .
 
-pass:Japanese
+pass:Home_Japanese
       rdf:type owl:Class ;
       rdfs:comment "the Passports Home for BBC Japanese assets"@en-gb ;
       rdfs:isDefinedBy <http://www.bbc.co.uk/ontologies/passports> ;
       rdfs:label "BBC Japanese"@en-gb ;
       rdfs:subClassOf pass:Home .
 
-pass:Korean
+pass:Home_Korean
       rdf:type owl:Class ;
       rdfs:comment "the Passports Home for BBC Korean assets"@en-gb ;
       rdfs:isDefinedBy <http://www.bbc.co.uk/ontologies/passports> ;
       rdfs:label "BBC Korean"@en-gb ;
       rdfs:subClassOf pass:Home .
 
-pass:Marathi
+pass:Home_Marathi
       rdf:type owl:Class ;
       rdfs:comment "the Passports Home for BBC Marathi assets"@en-gb ;
       rdfs:isDefinedBy <http://www.bbc.co.uk/ontologies/passports> ;
       rdfs:label "BBC Marathi"@en-gb ;
       rdfs:subClassOf pass:Home .
 
-pass:Mundo
+pass:Home_Mundo
       rdf:type owl:Class ;
       rdfs:comment "the Passports Home for BBC Mundo assets"@en-gb ;
       rdfs:isDefinedBy <http://www.bbc.co.uk/ontologies/passports> ;
       rdfs:label "BBC Mundo"@en-gb ;
       rdfs:subClassOf pass:Home .
 
-pass:Pashto
+pass:Home_Pashto
       rdf:type owl:Class ;
       rdfs:comment "the Passports Home for BBC Pashto assets"@en-gb ;
       rdfs:isDefinedBy <http://www.bbc.co.uk/ontologies/passports> ;
       rdfs:label "BBC Pashto"@en-gb ;
       rdfs:subClassOf pass:Home .
 
-pass:Persian
+pass:Home_Persian
       rdf:type owl:Class ;
       rdfs:comment "the Passports Home for BBC Persian assets"@en-gb ;
       rdfs:isDefinedBy <http://www.bbc.co.uk/ontologies/passports> ;
       rdfs:label "BBC Persian"@en-gb ;
       rdfs:subClassOf pass:Home .
 
-pass:Pidgin
+pass:Home_Pidgin
       rdf:type owl:Class ;
       rdfs:comment "the Passports Home for BBC Pidgin assets"@en-gb ;
       rdfs:isDefinedBy <http://www.bbc.co.uk/ontologies/passports> ;
       rdfs:label "BBC Pidgin"@en-gb ;
       rdfs:subClassOf pass:Home .
 
-pass:Punjabi
+pass:Home_Punjabi
       rdf:type owl:Class ;
       rdfs:comment "the Passports Home for BBC Punjabi assets"@en-gb ;
       rdfs:isDefinedBy <http://www.bbc.co.uk/ontologies/passports> ;
       rdfs:label "BBC Punjabi"@en-gb ;
       rdfs:subClassOf pass:Home .
 
-pass:Russian
+pass:Home_Russian
       rdf:type owl:Class ;
       rdfs:comment "the Passports Home for BBC Russian assets"@en-gb ;
       rdfs:isDefinedBy <http://www.bbc.co.uk/ontologies/passports> ;
       rdfs:label "BBC Russian"@en-gb ;
       rdfs:subClassOf pass:Home .
 
-pass:Serbian
+pass:Home_Serbian
       rdf:type owl:Class ;
       rdfs:comment "the Passports Home for BBC Serbian assets"@en-gb ;
       rdfs:isDefinedBy <http://www.bbc.co.uk/ontologies/passports> ;
       rdfs:label "BBC Serbian"@en-gb ;
       rdfs:subClassOf pass:Home .
 
-pass:Telugu
+pass:Home_Telugu
       rdf:type owl:Class ;
       rdfs:comment "the Passports Home for BBC Telugu assets"@en-gb ;
       rdfs:isDefinedBy <http://www.bbc.co.uk/ontologies/passports> ;
       rdfs:label "BBC Telugu"@en-gb ;
       rdfs:subClassOf pass:Home .
 
-pass:Thai
+pass:Home_Thai
       rdf:type owl:Class ;
       rdfs:comment "the Passports Home for BBC Thai assets"@en-gb ;
       rdfs:isDefinedBy <http://www.bbc.co.uk/ontologies/passports> ;
       rdfs:label "BBC Thai"@en-gb ;
       rdfs:subClassOf pass:Home .
 
-pass:Urdu
+pass:Home_Urdu
       rdf:type owl:Class ;
       rdfs:comment "the Passports Home for BBC Urdu assets"@en-gb ;
       rdfs:isDefinedBy <http://www.bbc.co.uk/ontologies/passports> ;
       rdfs:label "BBC Urdu"@en-gb ;
       rdfs:subClassOf pass:Home .
 
-pass:Yoruba
+pass:Home_Yoruba
       rdf:type owl:Class ;
       rdfs:comment "the Passports Home for BBC Yoruba assets"@en-gb ;
       rdfs:isDefinedBy <http://www.bbc.co.uk/ontologies/passports> ;
       rdfs:label "BBC Yoruba"@en-gb ;
       rdfs:subClassOf pass:Home .
 
+### enumerated types of State ###
+
+pass:State_Available
+      rdf:type owl:Class ;
+      rdfs:comment "the State of an asset that is available to the public - a published asset"@en-gb ;
+      rdfs:isDefinedBy <http://www.bbc.co.uk/ontologies/passports> ;
+      rdfs:label "Available"@en-gb ;
+      rdfs:subClassOf pass:State .
+
+pass:State_Unavailable
+      rdf:type owl:Class ;
+      rdfs:comment "the State of an asset that is not available to the public - an unpublished asset"@en-gb ;
+      rdfs:isDefinedBy <http://www.bbc.co.uk/ontologies/passports> ;
+      rdfs:label "Unvailable"@en-gb ;
+      rdfs:subClassOf pass:State .

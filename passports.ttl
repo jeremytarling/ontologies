@@ -33,11 +33,11 @@
 
 ## main classes ##
 
-pass:Passport
+pass:Availability
       rdf:type owl:Class ;
-      rdfs:comment "a metadata document that describes a BBC asset"@en-gb ;
+      rdfs:comment "an enumerated type object that represents the availability of an asset based on Info Sec classifications - Public|Protected|Restricted"@en-gb ;
       rdfs:isDefinedBy <http://www.bbc.co.uk/ontologies/passports> ;
-      rdfs:label "Passport"@en-gb ;
+      rdfs:label "State"@en-gb ;
       rdfs:subClassOf owl:Thing .
 
 pass:Home
@@ -54,14 +54,38 @@ pass:Language
       rdfs:label "Language"@en-gb ;
       rdfs:subClassOf owl:Thing .
 
-pass:State
+pass:Passport
       rdf:type owl:Class ;
-      rdfs:comment "an enumerated type object that represents the stae of an asset (for example published vs unpublished)"@en-gb ;
+      rdfs:comment "a metadata document that describes a BBC asset"@en-gb ;
       rdfs:isDefinedBy <http://www.bbc.co.uk/ontologies/passports> ;
-      rdfs:label "State"@en-gb ;
+      rdfs:label "Passport"@en-gb ;
       rdfs:subClassOf owl:Thing .
 
+pass:Predicate
+      rdf:type owl:Class ;
+      rdfs:comment "an instance of a relationship between a resource and some descriptive metadata  - a tagging"@en-gb ;
+      rdfs:isDefinedBy <http://www.bbc.co.uk/ontologies/passports> ;
+      rdfs:label "Predicate"@en-gb ;
+      rdfs:subClassOf owl:Thing .
+
+pass:Provenance
+      rdf:type owl:Class ;
+      rdfs:comment "a system or individual that is the source of a tagging"@en-gb ;
+      rdfs:isDefinedBy <http://www.bbc.co.uk/ontologies/passports> ;
+      rdfs:label "Provenance"@en-gb ;
+      rdfs:subClassOf owl:Thing .
+
+
+
 ## predicates ##
+
+pass:availability
+      rdf:type owl:DatatypeProperty ;
+      rdfs:comment "the availability of a resource according to Information Security classification: public, protected or restricted"@en-gb ;
+      rdfs:isDefinedBy <http://www.bbc.co.uk/ontologies/passports> ;
+      rdfs:label "state"@en-gb ;
+      rdfs:domain pass:Passport ;
+      rdfs:range pass:availability .
 
 pass:describes
       rdf:type owl:DatatypeProperty ;
@@ -71,22 +95,6 @@ pass:describes
       rdfs:domain pass:Passport ;
       rdfs:range owl:Thing .
 
-pass:home
-      rdf:type owl:DatatypeProperty ;
-      rdfs:comment "The home property defines which BBC product owns the content and has its branding applied when the content is displayed to the audience.  Homes will be top level products such as News, Sport, BBC Three, BBC Mundo and iPlayer."@en-gb ;
-      rdfs:isDefinedBy <http://www.bbc.co.uk/ontologies/passports> ;
-      rdfs:label "home"@en-gb ;
-      rdfs:domain pass:Passport ;
-      rdfs:range pass:Home .
-
-pass:category
-      rdf:type owl:DatatypeProperty ;
-      rdfs:comment "The category property will enable us to distinguish factual reports from analysis, opinion and other genres. Applies to text, video, audio and other work. Our ambition is to align the categories so that they can be mapped to the Trust Project's Type of Work definitions.  However, the Types of Work definitions are designed for journalistic content so we may not be able to create mappings for fictional content or other types of non-journalism content such as recipes."@en-gb ;
-      rdfs:isDefinedBy <http://www.bbc.co.uk/ontologies/passports> ;
-      rdfs:label "category"@en-gb ;
-      rdfs:domain pass:Passport ;
-      rdfs:range po:Category .
-
 pass:genre
       rdf:type owl:DatatypeProperty ;
       rdfs:comment "The genre property indicates broad sets into which we can group content.  In the programmes world the set of genres is defined in the Programmes ontology and can be seen at http://www.bbc.co.uk/programmes/genres.  In News the site sections such as 'politics' and 'business' broadly map to the Passport definition of genre."@en-gb ;
@@ -95,13 +103,13 @@ pass:genre
       rdfs:domain pass:Passport ;
       rdfs:range po:Genre .
 
-pass:createdBy
+pass:home
       rdf:type owl:DatatypeProperty ;
-      rdfs:comment "The createdBy property tells us who created the content.  This is separated out from home to allow for editorial teams who create content for multiple products, Newsbeat creating content for both News and BBC Three for example.  The values for createdBy should model the BBC's organisational structure, this will make it possible to attribute content to either a broad division or to a specific team depending on the use case.  So if a piece of content was created by the BBC Berkshire team we should also be able to know that the team is part of English Regions which is part of Domestic News."@en-gb ;
+      rdfs:comment "The home property defines which BBC product owns the content and has its branding applied when the content is displayed to the audience.  Homes will be top level products such as News, Sport, BBC Three, BBC Mundo and iPlayer."@en-gb ;
       rdfs:isDefinedBy <http://www.bbc.co.uk/ontologies/passports> ;
-      rdfs:label "createdBy"@en-gb ;
+      rdfs:label "home"@en-gb ;
       rdfs:domain pass:Passport ;
-      rdfs:range xsd:string .
+      rdfs:range pass:Home .
 
 pass:language
       rdf:type owl:DatatypeProperty ;
@@ -111,29 +119,14 @@ pass:language
       rdfs:domain pass:Passport ;
       rdfs:range xsd:string .
 
-pass:campaign
-      rdf:type owl:DatatypeProperty ;
-      rdfs:comment "The campaign property is used to indicate time-bound editorial initiatives where content is created with the aim of moving a target metric.  Content that will be popular with 16-35 year old women for example.  The list of active campaigns is managed by the Audience Engagement team and campaigns are applied to content when it is created.  The campaign identifier can then be used to produce reports so that editorial can evaluate the campaign's success. "@en-gb ;
-      rdfs:isDefinedBy <http://www.bbc.co.uk/ontologies/passports> ;
-      rdfs:label "campaign"@en-gb ;
-      rdfs:domain pass:Passport ;
-      rdfs:range xsd:string .
-
-pass:state
-      rdf:type owl:DatatypeProperty ;
-      rdfs:comment "A key difference between Passports and previous common metadata models such as Creative Works is that Passports can describe entities that are not yet published or will never be published.  Holding a representation of state in Passport thus becomes necessary so that systems listening to Passport notifications can quickly decide if a Passport creation or state change is relevant to them, audience facing systems will not be interested in content that is not intended to be consumed by the audience. As BBC content management systems all implement different workflows with different statuses the Passport state model needs to be very simple and generic so as not to be a bar to integration.  We propose that state be represented by a boolean flag that determines whether content is intended to be available to the audience or not.  Please note that further rights restrictions may be imposed on the content and that we do not intend to model detailed rights information in Passports."@en-gb ;
-      rdfs:isDefinedBy <http://www.bbc.co.uk/ontologies/passports> ;
-      rdfs:label "state"@en-gb ;
-      rdfs:domain pass:Passport ;
-      rdfs:range pass:State .
-
-pass:tag
+pass:tagging
       rdf:type owl:DatatypeProperty ;
       rdfs:comment "The relationship between a Passport and a BBC Thing - a tagging"@en-gb ;
       rdfs:isDefinedBy <http://www.bbc.co.uk/ontologies/passports> ;
       rdfs:label "tag"@en-gb ;
-      rdfs:domain pass:Passport ;
-      rdfs:range core:Thing .
+      rdfs:domain pass:Passport .
+
+## subproperties of pass:tagging ## '
 
 pass:about
       rdf:type owl:DatatypeProperty ;
@@ -142,7 +135,7 @@ pass:about
       rdfs:label "about"@en-gb ;
       rdfs:domain pass:Passport ;
       rdfs:range core:Thing ;
-      rdfs:subPropertyOf pass:tag .
+      rdfs:subPropertyOf pass:tagging .
 
 pass:mentions
       rdf:type owl:DatatypeProperty ;
@@ -151,7 +144,7 @@ pass:mentions
       rdfs:label "mentions"@en-gb ;
       rdfs:domain pass:Passport ;
       rdfs:range core:Thing ;
-      rdfs:subPropertyOf pass:tag .
+      rdfs:subPropertyOf pass:tagging .
 
 ## enumerated types of Home class ##
 
@@ -396,16 +389,23 @@ pass:Home_Yoruba
 
 ### enumerated types of State ###
 
-pass:State_Available
+pass:State_Public
       rdf:type owl:Class ;
       rdfs:comment "the State of an asset that is available to the public - a published asset"@en-gb ;
       rdfs:isDefinedBy <http://www.bbc.co.uk/ontologies/passports> ;
-      rdfs:label "Available"@en-gb ;
+      rdfs:label "Public"@en-gb ;
       rdfs:subClassOf pass:State .
 
-pass:State_Unavailable
+pass:State_Protected
       rdf:type owl:Class ;
       rdfs:comment "the State of an asset that is not available to the public - an unpublished asset"@en-gb ;
       rdfs:isDefinedBy <http://www.bbc.co.uk/ontologies/passports> ;
-      rdfs:label "Unvailable"@en-gb ;
+      rdfs:label "Protected"@en-gb ;
+      rdfs:subClassOf pass:State .
+
+pass:State_Restricted
+      rdf:type owl:Class ;
+      rdfs:comment "the State of an asset that is not available to the public and meets the BBC IS description criteria of restricted information"@en-gb ;
+      rdfs:isDefinedBy <http://www.bbc.co.uk/ontologies/passports> ;
+      rdfs:label "Restricted"@en-gb ;
       rdfs:subClassOf pass:State .
